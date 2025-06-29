@@ -10,13 +10,11 @@ public class Main {
 		// Create a new ChromeDriver instance
 		WebDriver driver = new ChromeDriver();
 
-		// Navigate to a website
+		// Open browser and navigate to Youtube
 		driver.get("https://www.youtube.com");
-		// driver.findElement(null)
-		// Perform actions (e.g., find an element and interact with it)
-
+		
 		// Close the browser
-// driver.quit();
+		// driver.quit();
 
 	}
 
