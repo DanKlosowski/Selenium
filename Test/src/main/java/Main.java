@@ -11,7 +11,7 @@ public class Main {
         WebDriver driver = new ChromeDriver();
 
         // Navigate to a website
-        driver.get("https://www.google.com");
+        driver.get("https://www.youtube.com");
         //driver.findElement(null)
         // Perform actions (e.g., find an element and interact with it)
 
