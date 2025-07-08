@@ -23,13 +23,13 @@ public class ReusableMethods {
 		signInButton.click();
 		
 		WebElement email = driver.findElement(By.id("identifierId"));
-		email.sendKeys(Config.userEmail);//takes username from Config file
+		email.sendKeys(Config.userEmail);//takes username from Config file and enters it into the email field
 		
 		WebElement emailNextButton = driver.findElement(By.id("identifierNext"));
 		emailNextButton.click();
 					
 		WebElement password = driver.findElement(By.name("Passwd"));
-		password.sendKeys(Config.userPassword);
+		password.sendKeys(Config.userPassword);//takes password from Config file and enters it into the password field
 		
 		WebElement passwordNextButton = driver.findElement(By.id("passwordNext"));
 		passwordNextButton.click();

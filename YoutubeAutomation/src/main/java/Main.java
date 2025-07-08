@@ -13,7 +13,7 @@ public class Main {
 		//setting up a date string to include in the report filename so that a new report is created instead of overwriting the old file
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH.mm.ss");
 		LocalDateTime date = LocalDateTime.now();
-        String dateString = date.format(formatter);
+		String dateString = date.format(formatter);
 		
 		//initializing ExtentReports and creating the report file
 		ExtentReports report = new ExtentReports();
@@ -21,8 +21,10 @@ public class Main {
 		report.attachReporter(reportLocation);
 		
 		//Test cases
-		TC_CannotReuseEmail.cre(report);
-		TC_UserAbleToLogin.ual(report);
+		//TC_CannotReuseEmail.cre(report);
+		//TC_UserAbleToLogin.ual(report);
+		//TC_UnableToLoginWrongEmail.ulwe(report);
+		TC_UnableToLoginWrongPassword.ulwp(report);
 		
 	}
 

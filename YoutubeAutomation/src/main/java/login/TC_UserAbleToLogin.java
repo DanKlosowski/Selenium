@@ -19,22 +19,21 @@ public class TC_UserAbleToLogin {
 		//This test case is to check that a user is able to login with an existing account.
 
 		
-		WebDriver driver = new ChromeDriver();
-				
+		WebDriver driver = new ChromeDriver();	
 		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));//implicit wait of 5 seconds for all actions
-		
-		TakesScreenshot scrShot =((TakesScreenshot)driver);
-		ExtentTest test = report.createTest("User is able to login");//Initializing the test case for the report
+		TakesScreenshot scrShot =((TakesScreenshot)driver);//screenshot initialization
+		ExtentTest test = report.createTest("User should be able to login");//Initializing the test case for the report
 		
 		try {
 			
 
 		driver.get("https://www.youtube.com");
-				
+			
+		//calling the method to login
 		ReusableMethods.login(driver);
 		
 		
-		ExtentTest loginStep = test.createNode("After login");//Creating a node immediately after login
+		ExtentTest loginStep = test.createNode("After login");//Creating a test step immediately after login
 		try {
 			WebElement profileButton = driver.findElement(By.id("img"));
 
@@ -73,7 +72,6 @@ public class TC_UserAbleToLogin {
 		}
 		
 		report.flush();//writes the test information to the destination
-		driver.quit();
-				
+		driver.quit();	
 	}
 }

@@ -21,11 +21,10 @@ public class TC_CannotReuseEmail {
 		//This test case is to test that a user should be unable to create a new Youtube account with an email that is already linked to a Youtube account through the typical method of account creation.
 		//I'm not creating a test case for the creation of an account because the captcha required to create new accounts and emails prevent this
 		
-		WebDriver driver = new ChromeDriver();
-				
-		Wait wait = new WebDriverWait(driver, Duration.ofSeconds(5));//initializing and setting the wait time to 5 seconds
-		TakesScreenshot scrShot =((TakesScreenshot)driver);
-		ExtentTest test = report.createTest("Cannot reuse email when creating a new account");//Initializing the test case for the report
+		WebDriver driver = new ChromeDriver();	
+		Wait wait = new WebDriverWait(driver, Duration.ofSeconds(5));//initializing and setting the explicit wait time to 5 seconds
+		TakesScreenshot scrShot =((TakesScreenshot)driver);//screenshot initialization
+		ExtentTest test = report.createTest("Should not be able to reuse email when creating a new account");//Initializing the test case for the report
 		
 		try {
 			
@@ -35,7 +34,7 @@ public class TC_CannotReuseEmail {
 		WebElement signInButton = driver.findElement(By.xpath("//*[@id=\"buttons\"]/ytd-button-renderer/yt-button-shape/a"));
 		signInButton.click();
 		
-		wait.until(d -> driver.findElement(By.cssSelector("#yDmH0d > c-wiz > div > div.JYXaTc > div > div.FO2vFd > div > div > div:nth-child(1) > div > button")));
+		wait.until(d -> driver.findElement(By.cssSelector("#yDmH0d > c-wiz > div > div.JYXaTc > div > div.FO2vFd > div > div > div:nth-child(1) > div > button")).isDisplayed());
 		
 		WebElement createAccountButton = driver.findElement(By.cssSelector("#yDmH0d > c-wiz > div > div.JYXaTc > div > div.FO2vFd > div > div > div:nth-child(1) > div > button"));
 		createAccountButton.click();
@@ -74,8 +73,8 @@ public class TC_CannotReuseEmail {
 		
 		wait.until(d -> driver.findElement(By.id("identifierId")).isDisplayed());
 		
-		//Creating a node for the step before the Next button is pressed
-		ExtentTest emailStep = test.createNode("Before the Next button is pressed");
+		//Creating a test step before the Next button is pressed
+		ExtentTest emailStep = test.createNode("Before the Next button on the email page is pressed");
 				
 		try {
 			//Entering the email address that is already being used by the test Youtube account and clicking on the next button
@@ -95,11 +94,11 @@ public class TC_CannotReuseEmail {
 		emailNextButton.click();
 		
 		
-			
-		wait.until(d -> driver.findElement(By.id("c20")).isDisplayed());//wait until the element is interactable
-			
+		WebElement errorMessage = driver.findElement(By.id("c20"));
+		wait.until(d -> errorMessage.isDisplayed());//wait until the element is interactable
+		
 		//Checking if the error message is displayed
-		if (driver.getPageSource().contains("That username is taken. Try another."))
+		if (errorMessage.getText().contains("That username is taken. Try another."))
 		{
 			//passed the test case and takes a screenshot
 			test.pass("The error message is displayed after the Next button is pressed", MediaEntityBuilder.createScreenCaptureFromBase64String(scrShot.getScreenshotAs(OutputType.BASE64)).build());
@@ -119,8 +118,7 @@ public class TC_CannotReuseEmail {
 		}
 		
 		report.flush();//writes the test information to the destination
-		driver.quit();
-				
+		driver.quit();		
 	}
 	
 }
