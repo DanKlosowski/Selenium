@@ -94,9 +94,7 @@ public class TC_UnableToLoginWrongEmail {
 		//Switching to the new browser tab that was opened by the link
 		Object[] windowHandles=driver.getWindowHandles().toArray();
 		driver.switchTo().window((String) windowHandles[1]);
-		//String title=driver.getTitle();
-		//assertEquals("Simple Page",title);
-		
+				
 		
 		//Checking if the url is correct
 		if (driver.getCurrentUrl().contains("https://support.google.com/accounts/answer/7675428"))
