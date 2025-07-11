@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import login.*;
 import studiocontent.TC_UploadVideo;
+import studiocontent.TC_UploadVideoWrongFileType;
 
 public class Main {
 
@@ -26,7 +27,8 @@ public class Main {
 		//TC_UserAbleToLogin.ual(report);
 		//TC_UnableToLoginWrongEmail.ulwe(report);
 		//TC_UnableToLoginWrongPassword.ulwp(report);
-		TC_UploadVideo.uv(report);
+		//TC_UploadVideo.uv(report);
+		TC_UploadVideoWrongFileType.uvwf(report);
 		
 	}
 
