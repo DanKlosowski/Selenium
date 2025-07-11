@@ -27,8 +27,8 @@ public class Main {
 		//TC_UserAbleToLogin.ual(report);
 		//TC_UnableToLoginWrongEmail.ulwe(report);
 		//TC_UnableToLoginWrongPassword.ulwp(report);
-		//TC_UploadVideo.uv(report);
-		TC_UploadVideoWrongFileType.uvwf(report);
+		TC_UploadVideo.uv(report);
+		//TC_UploadVideoWrongFileType.uvwf(report);
 		
 	}
 
