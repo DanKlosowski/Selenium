@@ -111,7 +111,20 @@ public class TC_UploadVideo {
 			webmStep.fail("Unable to find the WebM video upload element", MediaEntityBuilder.createScreenCaptureFromBase64String(scrShot.getScreenshotAs(OutputType.BASE64)).build());//failed the step and taking a screenshot
 			n.printStackTrace();
 		}
-			
+		
+		//Deleting the upload so that future tests are not affected
+		WebElement kebabButton = driver.findElement(By.cssSelector("#hover-items > ytcp-icon-button > tp-yt-iron-icon"));
+		kebabButton.click();
+		
+		WebElement deleteButton = driver.findElement(By.linkText("Delete forever"));
+		deleteButton.click();
+		
+		WebElement deleteCheckbox = driver.findElement(By.id("checkbox-container"));
+		deleteCheckbox.click();
+		
+		WebElement finalDeleteButton = driver.findElement(By.cssSelector("#confirm-button > ytcp-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill"));
+		finalDeleteButton.click();
+		
 		
 		//Doing the same process for uploading an MP4 file and filling the required fields
 		//
@@ -174,6 +187,20 @@ public class TC_UploadVideo {
 			mp4Step.fail("Unable to find the MP4 video upload element", MediaEntityBuilder.createScreenCaptureFromBase64String(scrShot.getScreenshotAs(OutputType.BASE64)).build());//failed the step and taking a screenshot
 			n.printStackTrace();
 		}
+		
+		//Deleting the upload so that future tests are not affected
+		//WebElement kebabButton = driver.findElement(By.cssSelector("#hover-items > ytcp-icon-button > tp-yt-iron-icon"));
+		kebabButton.click();
+		
+		//WebElement deleteButton = driver.findElement(By.linkText("Delete forever"));
+		deleteButton.click();
+		
+		//WebElement deleteCheckbox = driver.findElement(By.id("checkbox-container"));
+		deleteCheckbox.click();
+		
+		//WebElement finalDeleteButton = driver.findElement(By.cssSelector("#confirm-button > ytcp-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill"));
+		finalDeleteButton.click();
+		
 		
 		//If both steps passed then the test case passes
 		if (webmPass == true && mp4Pass == true)
