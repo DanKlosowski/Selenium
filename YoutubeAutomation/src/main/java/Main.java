@@ -22,7 +22,7 @@ public class Main {
 		ExtentSparkReporter reportLocation = new ExtentSparkReporter("target/TestCaseReport "+dateString+".html");
 		report.attachReporter(reportLocation);
 		
-		//Test cases
+		//Test cases ghvghvgh
 		//TC_CannotReuseEmail.cre(report);
 		//TC_UserAbleToLogin.ual(report);
 		//TC_UnableToLoginWrongEmail.ulwe(report);
