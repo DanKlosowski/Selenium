@@ -50,8 +50,23 @@ public class TC_UploadVideo {
 		
 		WebElement studioButton = driver.findElement(By.linkText("YouTube Studio"));
 		studioButton.click();
-		
-		
+/*			//delete this when done testing
+			WebElement contentButton3 = driver.findElement(By.cssSelector("#menu-paper-icon-item-1 > div.nav-item-text.style-scope.ytcp-navigation-drawer"));
+			contentButton3.click();
+
+			wait.until(d -> driver.findElement(By.cssSelector("#video-list-shorts-tab > div > ytcp-ve > span")).isDisplayed());
+			WebElement shortsTab3 = driver.findElement(By.cssSelector("#video-list-shorts-tab > div > ytcp-ve > span"));
+			shortsTab3.click();
+
+			wait.until(d -> driver.findElement(By.id("create-icon")));
+			WebElement createButton2 = driver.findElement(By.id("create-icon"));
+			createButton2.click();
+
+			wait.until(d -> driver.findElement(By.cssSelector("#text-item-0 > ytcp-ve > tp-yt-paper-item-body > div > div > div > yt-formatted-string")));
+			WebElement uploadVideosButton2 = driver.findElement(By.cssSelector("#text-item-0 > ytcp-ve > tp-yt-paper-item-body > div > div > div"));
+			uploadVideosButton2.click();
+			//delete end
+*/
 		//Uploading the WebM file and filling the required fields
 		wait.until(d -> driver.findElement(By.cssSelector("#upload-icon > tp-yt-iron-icon")));
 		WebElement uploadButton = driver.findElement(By.cssSelector("#upload-icon > tp-yt-iron-icon"));
@@ -104,6 +119,7 @@ public class TC_UploadVideo {
 		boolean webmPass = false;
 		
 		try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("video-title")));
 			WebElement videoTitle = driver.findElement(By.id("video-title"));
 			
 			if(videoTitle.getText().contains("catvideo")) {
@@ -144,14 +160,17 @@ public class TC_UploadVideo {
 		
 		//Doing the same process for uploading an MP4 file and filling the required fields
 		//
-		wait.until(d -> driver.findElement(By.id("create-icon")));
+		//Thread.sleep(5000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("create-icon")));
 		WebElement createButton = driver.findElement(By.id("create-icon"));
 		createButton.click();
-		
-		wait.until(d -> driver.findElement(By.cssSelector("#text-item-0 > ytcp-ve > tp-yt-paper-item-body > div > div > div > yt-formatted-string")));
+
+		//Thread.sleep(5000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#text-item-0 > ytcp-ve > tp-yt-paper-item-body > div > div > div")));
 		WebElement uploadVideosButton = driver.findElement(By.cssSelector("#text-item-0 > ytcp-ve > tp-yt-paper-item-body > div > div > div"));
 		uploadVideosButton.click();
-		
+
+		//Thread.sleep(5000);
 		WebElement selectFileButton2 = driver.findElement(By.name("Filedata"));
 		File video2 = new File("target/catvideo.mp4");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
 		selectFileButton2.sendKeys(video1.getAbsolutePath());
@@ -197,6 +216,7 @@ public class TC_UploadVideo {
 		Thread.sleep(1000);//1 sec wait for tab transition
 		
 		try {
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("video-title")));
 			WebElement videoTitle2 = driver.findElement(By.id("video-title"));
 			
 			if(videoTitle2.getText().contains("catvideo")) {
@@ -237,7 +257,7 @@ public class TC_UploadVideo {
 		//If both steps passed then the test case passes
 		if (webmPass == true && mp4Pass == true)
 		{
-			test.pass("The video files were uploaded", MediaEntityBuilder.createScreenCaptureFromBase64String(scrShot.getScreenshotAs(OutputType.BASE64)).build());
+			test.pass("The video files were uploaded");
 		}
 		else if (webmPass == true && mp4Pass == false)
 		{
