@@ -28,10 +28,7 @@ public class TC_UserAbleToLogin {
 		ExtentTest test = report.createTest("User should be able to login");//Initializing the test case for the report
 		
 		try {
-			
 
-		driver.get("https://www.youtube.com");
-			
 		//calling the method to login
 		ReusableMethods.login(driver);
 		

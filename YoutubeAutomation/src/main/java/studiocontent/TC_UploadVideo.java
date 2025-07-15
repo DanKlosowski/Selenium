@@ -3,12 +3,7 @@ package studiocontent;
 import java.io.File;
 import java.time.Duration;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -34,10 +29,7 @@ public class TC_UploadVideo {
 		ExtentTest test = report.createTest("User should be able to upload video files");//Initializing the test case for the report
 		
 		try {
-			
 
-		driver.get("https://www.youtube.com");
-			
 		//calling the method to login
 		ReusableMethods.login(driver);
 		
@@ -50,23 +42,7 @@ public class TC_UploadVideo {
 		
 		WebElement studioButton = driver.findElement(By.linkText("YouTube Studio"));
 		studioButton.click();
-/*			//delete this when done testing
-			WebElement contentButton3 = driver.findElement(By.cssSelector("#menu-paper-icon-item-1 > div.nav-item-text.style-scope.ytcp-navigation-drawer"));
-			contentButton3.click();
 
-			wait.until(d -> driver.findElement(By.cssSelector("#video-list-shorts-tab > div > ytcp-ve > span")).isDisplayed());
-			WebElement shortsTab3 = driver.findElement(By.cssSelector("#video-list-shorts-tab > div > ytcp-ve > span"));
-			shortsTab3.click();
-
-			wait.until(d -> driver.findElement(By.id("create-icon")));
-			WebElement createButton2 = driver.findElement(By.id("create-icon"));
-			createButton2.click();
-
-			wait.until(d -> driver.findElement(By.cssSelector("#text-item-0 > ytcp-ve > tp-yt-paper-item-body > div > div > div > yt-formatted-string")));
-			WebElement uploadVideosButton2 = driver.findElement(By.cssSelector("#text-item-0 > ytcp-ve > tp-yt-paper-item-body > div > div > div"));
-			uploadVideosButton2.click();
-			//delete end
-*/
 		//Uploading the WebM file and filling the required fields
 		wait.until(d -> driver.findElement(By.cssSelector("#upload-icon > tp-yt-iron-icon")));
 		WebElement uploadButton = driver.findElement(By.cssSelector("#upload-icon > tp-yt-iron-icon"));
@@ -98,8 +74,7 @@ public class TC_UploadVideo {
 			saveButton.click();
 			}
 		
-		//Checking for the WebM video file
-		//
+		//Navigating to the page to view uploaded videos
 		wait.until(d -> driver.findElement(By.cssSelector("#close-button > ytcp-button-shape > button")).isDisplayed());
 		WebElement closeButton = driver.findElement(By.cssSelector("#close-button > ytcp-button-shape > button"));
 		closeButton.click();
@@ -108,20 +83,26 @@ public class TC_UploadVideo {
 		
 		WebElement contentButton = driver.findElement(By.cssSelector("#menu-paper-icon-item-1 > div.nav-item-text.style-scope.ytcp-navigation-drawer"));
 		contentButton.click();
-		
+
 		wait.until(d -> driver.findElement(By.cssSelector("#video-list-shorts-tab > div > ytcp-ve > span")).isDisplayed());
 		WebElement shortsTab = driver.findElement(By.cssSelector("#video-list-shorts-tab > div > ytcp-ve > span"));
 		shortsTab.click();
 		
 		Thread.sleep(1000);//1 sec wait for tab transition
-		
+
 		ExtentTest webmStep = test.createNode("WebM file should be uploaded");
 		boolean webmPass = false;
-		
+
+		//Checking for the WebM video file
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(By.id("video-title")));
+			//setting up a try/catch because sometimes the video does not appear in the list so quickly but will appear after a refresh
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("video-title")));
+			}catch(TimeoutException t){
+				driver.navigate().refresh();
+			}
+
 			WebElement videoTitle = driver.findElement(By.id("video-title"));
-			
 			if(videoTitle.getText().contains("catvideo")) {
 				webmStep.pass("The WebM video was uploaded", MediaEntityBuilder.createScreenCaptureFromBase64String(scrShot.getScreenshotAs(OutputType.BASE64)).build());
 				webmPass = true;
@@ -155,22 +136,18 @@ public class TC_UploadVideo {
 			webmStep.fail("Unable to find the WebM video upload element", MediaEntityBuilder.createScreenCaptureFromBase64String(scrShot.getScreenshotAs(OutputType.BASE64)).build());//failed the step and taking a screenshot
 			n.printStackTrace();
 		}
-		
+
 
 		
 		//Doing the same process for uploading an MP4 file and filling the required fields
-		//
-		//Thread.sleep(5000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("create-icon")));
 		WebElement createButton = driver.findElement(By.id("create-icon"));
 		createButton.click();
 
-		//Thread.sleep(5000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#text-item-0 > ytcp-ve > tp-yt-paper-item-body > div > div > div")));
 		WebElement uploadVideosButton = driver.findElement(By.cssSelector("#text-item-0 > ytcp-ve > tp-yt-paper-item-body > div > div > div"));
 		uploadVideosButton.click();
 
-		//Thread.sleep(5000);
 		WebElement selectFileButton2 = driver.findElement(By.name("Filedata"));
 		File video2 = new File("target/catvideo.mp4");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
 		selectFileButton2.sendKeys(video1.getAbsolutePath());
@@ -185,7 +162,7 @@ public class TC_UploadVideo {
 		nextButton2.click();
 		wait.until(d -> nextButton2.isDisplayed());
 		nextButton2.click();
-		
+
 		WebElement privateRadioButton2 = driver.findElement(By.id("private-radio-button"));
 		privateRadioButton2.click();
 		
@@ -196,27 +173,23 @@ public class TC_UploadVideo {
 			Thread.sleep(500);
 			saveButton2.click();
 			}
-		
-		//Checking for the MP4 video file
-		//
+
 		wait.until(d -> driver.findElement(By.cssSelector("#close-button > ytcp-button-shape > button")).isDisplayed());
 		WebElement closeButton2 = driver.findElement(By.cssSelector("#close-button > ytcp-button-shape > button"));
 		closeButton2.click();
-				
-		WebElement contentButton2 = driver.findElement(By.cssSelector("#menu-paper-icon-item-1 > div.nav-item-text.style-scope.ytcp-navigation-drawer"));
-		contentButton2.click();
-		
-		wait.until(d -> driver.findElement(By.cssSelector("#video-list-shorts-tab > div > ytcp-ve > span")).isDisplayed());
-		WebElement shortsTab2 = driver.findElement(By.cssSelector("#video-list-shorts-tab > div > ytcp-ve > span"));
-		shortsTab2.click();
-		
+
+		// Checking for the MP4 video file
 		ExtentTest mp4Step = test.createNode("MP4 file should be uploaded");
 		boolean mp4Pass = false;
-		
-		Thread.sleep(1000);//1 sec wait for tab transition
-		
+
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(By.id("video-title")));
+			//setting up a try/catch because sometimes the video does not appear in the list so quickly but will appear after a refresh
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(By.id("video-title")));
+			}catch(TimeoutException t){
+				driver.navigate().refresh();
+			}
+
 			WebElement videoTitle2 = driver.findElement(By.id("video-title"));
 			
 			if(videoTitle2.getText().contains("catvideo")) {
@@ -282,6 +255,6 @@ public class TC_UploadVideo {
 		}
 		
 		report.flush();//writes the test information to the destination
-		//driver.quit();	
+		driver.quit();
 	}
 }

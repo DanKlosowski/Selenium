@@ -13,19 +13,12 @@ import reusable.Config;
 
 public class ReusableMethods {
 
-	//Method to take screenshots for my test cases
-	/*public static void Screenshot (WebDriver driver, String filePath) throws IOException {
-		TakesScreenshot scrShot =((TakesScreenshot)driver);
-		File srcFile=scrShot.getScreenshotAs(OutputType.FILE);
-		File destFile=new File(filePath);
-		Files.copy(srcFile, destFile);
-		
-	}*/
-	
 	//Method to login with the test account
 	public static void login (WebDriver driver) {
 		Wait wait = new WebDriverWait(driver, Duration.ofSeconds(5));//initializing and setting the explicit wait time to 5 seconds
-		
+
+		driver.get("https://www.youtube.com");
+
 		WebElement signInButton = driver.findElement(By.xpath("//*[@id=\"buttons\"]/ytd-button-renderer/yt-button-shape/a"));
 		signInButton.click();
 		

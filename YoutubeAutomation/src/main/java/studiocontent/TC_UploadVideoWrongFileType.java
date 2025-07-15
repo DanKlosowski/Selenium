@@ -28,10 +28,7 @@ public class TC_UploadVideoWrongFileType {
 		ExtentTest test = report.createTest("User shouldn't be able to upload non video files");//Initializing the test case for the report
 		
 		try {
-			
 
-		driver.get("https://www.youtube.com");
-			
 		//calling the method to login
 		ReusableMethods.login(driver);
 		
