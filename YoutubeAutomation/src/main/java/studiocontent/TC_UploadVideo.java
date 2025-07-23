@@ -49,7 +49,7 @@ public class TC_UploadVideo {
 		uploadButton.click();
 		
 		WebElement selectFileButton = driver.findElement(By.name("Filedata"));
-		File video1 = new File("target/catvideo.webm");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
+		File video1 = new File("target/catvideowebm.webm");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
 		selectFileButton.sendKeys(video1.getAbsolutePath());
 		
 		wait.until(d -> driver.findElement(By.name("VIDEO_MADE_FOR_KIDS_NOT_MFK")).isDisplayed());
@@ -58,9 +58,9 @@ public class TC_UploadVideo {
 		
 		WebElement nextButton = driver.findElement(By.cssSelector("#next-button > ytcp-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill"));
 		nextButton.click();
-		wait.until(d -> nextButton.isDisplayed());
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#next-button > ytcp-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill")));
 		nextButton.click();
-		wait.until(d -> nextButton.isDisplayed());
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#next-button > ytcp-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill")));
 		nextButton.click();
 		
 		WebElement privateRadioButton = driver.findElement(By.id("private-radio-button"));
@@ -103,7 +103,7 @@ public class TC_UploadVideo {
 			}
 
 			WebElement videoTitle = driver.findElement(By.id("video-title"));
-			if(videoTitle.getText().contains("catvideo")) {
+			if(videoTitle.getText().contains("catvideowebm")) {
 				webmStep.pass("The WebM video was uploaded", MediaEntityBuilder.createScreenCaptureFromBase64String(scrShot.getScreenshotAs(OutputType.BASE64)).build());
 				webmPass = true;
 			}
@@ -149,7 +149,7 @@ public class TC_UploadVideo {
 		uploadVideosButton.click();
 
 		WebElement selectFileButton2 = driver.findElement(By.name("Filedata"));
-		File video2 = new File("target/catvideo.mp4");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
+		File video2 = new File("target/catvideomp4.mp4");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
 		selectFileButton2.sendKeys(video1.getAbsolutePath());
 		
 		wait.until(d -> driver.findElement(By.name("VIDEO_MADE_FOR_KIDS_NOT_MFK")).isDisplayed());
@@ -158,10 +158,11 @@ public class TC_UploadVideo {
 		
 		WebElement nextButton2 = driver.findElement(By.cssSelector("#next-button > ytcp-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill"));
 		nextButton2.click();
-		wait.until(d -> nextButton2.isDisplayed());
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#next-button > ytcp-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill")));
 		nextButton2.click();
-		wait.until(d -> nextButton2.isDisplayed());
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#next-button > ytcp-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill")));
 		nextButton2.click();
+
 
 		WebElement privateRadioButton2 = driver.findElement(By.id("private-radio-button"));
 		privateRadioButton2.click();
@@ -192,7 +193,7 @@ public class TC_UploadVideo {
 
 			WebElement videoTitle2 = driver.findElement(By.id("video-title"));
 			
-			if(videoTitle2.getText().contains("catvideo")) {
+			if(videoTitle2.getText().contains("catvideomp4")) {
 				mp4Step.pass("The MP4 video was uploaded", MediaEntityBuilder.createScreenCaptureFromBase64String(scrShot.getScreenshotAs(OutputType.BASE64)).build());
 				mp4Pass = true;
 			}

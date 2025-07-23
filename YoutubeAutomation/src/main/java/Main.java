@@ -23,12 +23,12 @@ public class Main {
 		report.attachReporter(reportLocation);
 		
 		//Test cases
-		//TC_CannotReuseEmail.cre(report);
-		//TC_UserAbleToLogin.ual(report);
-		//TC_UnableToLoginWrongEmail.ulwe(report);
-		//TC_UnableToLoginWrongPassword.ulwp(report);
+		TC_CannotReuseEmail.cre(report);
+		TC_UserAbleToLogin.ual(report);
+		TC_UnableToLoginWrongEmail.ulwe(report);
+		TC_UnableToLoginWrongPassword.ulwp(report);
 		TC_UploadVideo.uv(report);
-		//TC_UploadVideoWrongFileType.uvwf(report);
+		TC_UploadVideoWrongFileType.uvwf(report);
 		
 	}
 
