@@ -50,7 +50,7 @@ public class TC_UploadVideoWrongFileType {
 		uploadButton.click();
 		
 		WebElement selectFileButton = driver.findElement(By.name("Filedata"));
-		File video1 = new File("target/catvideo.txt");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
+		File video1 = new File("UploadFiles/catvideo.txt");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
 		selectFileButton.sendKeys(video1.getAbsolutePath());
 		
 		//Test step is passed if the correct error message is displayed for the text file
@@ -78,7 +78,7 @@ public class TC_UploadVideoWrongFileType {
 		WebElement uploadButton2 = driver.findElement(By.cssSelector("#upload-icon > tp-yt-iron-icon"));//new variable needs to be created for the same button to avoid stale error after refresh
 		uploadButton2.click();
 		
-		File video2 = new File("target/catvideo.jpg");
+		File video2 = new File("UploadFiles/catvideo.jpg");
 		WebElement selectFileButton2 = driver.findElement(By.name("Filedata"));
 		selectFileButton2.sendKeys(video2.getAbsolutePath());
 		
@@ -105,7 +105,7 @@ public class TC_UploadVideoWrongFileType {
 		WebElement uploadButton3 = driver.findElement(By.cssSelector("#upload-icon > tp-yt-iron-icon"));
 		uploadButton3.click();
 		
-		File video3 = new File("target/catvideo.xlsx");
+		File video3 = new File("UploadFiles/catvideo.xlsx");
 		WebElement selectFileButton3 = driver.findElement(By.name("Filedata"));
 		selectFileButton3.sendKeys(video3.getAbsolutePath());
 		

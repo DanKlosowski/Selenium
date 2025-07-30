@@ -19,7 +19,7 @@ public class Main {
 		
 		//initializing ExtentReports and creating the report file
 		ExtentReports report = new ExtentReports();
-		ExtentSparkReporter reportLocation = new ExtentSparkReporter("target/TestCaseReport "+dateString+".html");
+		ExtentSparkReporter reportLocation = new ExtentSparkReporter("Reports/TestCaseReport "+dateString+".html");
 		report.attachReporter(reportLocation);
 		
 		//Test cases
@@ -29,7 +29,6 @@ public class Main {
 		TC_UnableToLoginWrongPassword.ulwp(report);
 		TC_UploadVideo.uv(report);
 		TC_UploadVideoWrongFileType.uvwf(report);
-		
 	}
 
 }

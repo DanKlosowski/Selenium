@@ -49,7 +49,7 @@ public class TC_UploadVideo {
 		uploadButton.click();
 		
 		WebElement selectFileButton = driver.findElement(By.name("Filedata"));
-		File video1 = new File("target/catvideowebm.webm");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
+		File video1 = new File("UploadFiles/catvideowebm.webm");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
 		selectFileButton.sendKeys(video1.getAbsolutePath());
 		
 		wait.until(d -> driver.findElement(By.name("VIDEO_MADE_FOR_KIDS_NOT_MFK")).isDisplayed());
@@ -130,7 +130,7 @@ public class TC_UploadVideo {
 			
 			WebElement finalDeleteButton = driver.findElement(By.id("confirm-button"));
 			finalDeleteButton.click();
-
+			Thread.sleep(1000);//Need to wait or else the delete won't process
 		}
 		catch (NoSuchElementException n){
 			webmStep.fail("Unable to find the WebM video upload element", MediaEntityBuilder.createScreenCaptureFromBase64String(scrShot.getScreenshotAs(OutputType.BASE64)).build());//failed the step and taking a screenshot
@@ -149,8 +149,8 @@ public class TC_UploadVideo {
 		uploadVideosButton.click();
 
 		WebElement selectFileButton2 = driver.findElement(By.name("Filedata"));
-		File video2 = new File("target/catvideomp4.mp4");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
-		selectFileButton2.sendKeys(video1.getAbsolutePath());
+		File video2 = new File("UploadFiles/catvideomp4.mp4");//instead of manually entering the absolute path, having the file saved to the variable and calling getAbsolutePath() so anyone that downloads the repository can run it without changing the filepath
+		selectFileButton2.sendKeys(video2.getAbsolutePath());
 		
 		wait.until(d -> driver.findElement(By.name("VIDEO_MADE_FOR_KIDS_NOT_MFK")).isDisplayed());
 		WebElement kidsRadioButton2 = driver.findElement(By.name("VIDEO_MADE_FOR_KIDS_NOT_MFK"));//clicking on mandatory radio button option
@@ -161,7 +161,7 @@ public class TC_UploadVideo {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#next-button > ytcp-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill")));
 		nextButton2.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#next-button > ytcp-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill")));
-		nextButton2.click();
+		driver.findElement(By.cssSelector("#next-button > ytcp-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill")).click();
 
 
 		WebElement privateRadioButton2 = driver.findElement(By.id("private-radio-button"));
@@ -205,6 +205,7 @@ public class TC_UploadVideo {
 			
 			//Setting up a hover action to be able to click on the kebab button
 			Actions action = new Actions(driver);
+			wait.until(d -> driver.findElement(By.id("video-title")).isDisplayed());
 			action.moveToElement(videoTitle2).perform();
 
 			WebElement kebabButton2 = driver.findElement(By.cssSelector("#hover-items > ytcp-icon-button > tp-yt-iron-icon"));
@@ -220,6 +221,7 @@ public class TC_UploadVideo {
 			
 			WebElement finalDeleteButton2 = driver.findElement(By.id("confirm-button"));
 			finalDeleteButton2.click();
+			Thread.sleep(1000);//Need to wait or else the delete won't process
 		}
 		catch (NoSuchElementException n){
 			mp4Step.fail("Unable to find the MP4 video upload element", MediaEntityBuilder.createScreenCaptureFromBase64String(scrShot.getScreenshotAs(OutputType.BASE64)).build());//failed the step and taking a screenshot
